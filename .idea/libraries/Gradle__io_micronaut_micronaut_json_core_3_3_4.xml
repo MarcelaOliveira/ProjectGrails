@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: io.micronaut:micronaut-json-core:3.3.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.micronaut/micronaut-json-core/3.3.4/29c74df7b925d7479e03a1010a3ddc428f2c0de1/micronaut-json-core-3.3.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.micronaut/micronaut-json-core/3.3.4/e94eef19603292198e165c4d659709a3dbbcde6a/micronaut-json-core-3.3.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

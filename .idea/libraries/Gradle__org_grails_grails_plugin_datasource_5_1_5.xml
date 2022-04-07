@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.grails:grails-plugin-datasource:5.1.5">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails/grails-plugin-datasource/5.1.5/5673741d7eeaa93758663fd3ce1de2b6215be215/grails-plugin-datasource-5.1.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails/grails-plugin-datasource/5.1.5/e4b7114ac5147e92ebd9f5ddef86c0644d076ad6/grails-plugin-datasource-5.1.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

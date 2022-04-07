@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: io.micronaut.cache:micronaut-cache-core:3.3.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.micronaut.cache/micronaut-cache-core/3.3.0/1fed271a33ccb4dda2289ff8da239fd88bbef9c1/micronaut-cache-core-3.3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.micronaut.cache/micronaut-cache-core/3.3.0/7793bba6d22fc364ca151390ffb8d013ea05752e/micronaut-cache-core-3.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

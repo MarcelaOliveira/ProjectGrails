@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: io.micronaut:micronaut-websocket:3.3.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.micronaut/micronaut-websocket/3.3.4/14cb66367eda76cac323a3ae6c1cab966afb5a8b/micronaut-websocket-3.3.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.micronaut/micronaut-websocket/3.3.4/b2a40552f17b17254c1906af94bb871182c9bdee/micronaut-websocket-3.3.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
