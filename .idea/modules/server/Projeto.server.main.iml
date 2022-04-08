@@ -59,6 +59,7 @@
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-tomcat:2.6.4" level="project" />
     <orderEntry type="library" name="Gradle: org.grails.plugins:cache:5.0.0" level="project" />
     <orderEntry type="library" name="Gradle: org.hibernate:hibernate-core:5.6.5.Final" level="project" />
+    <orderEntry type="library" name="Gradle: org.gradle:gradle-core:2.2" level="project" />
     <orderEntry type="library" name="Gradle: io.micronaut:micronaut-aop:3.3.4" level="project" />
     <orderEntry type="library" name="Gradle: io.micronaut:micronaut-inject:3.3.4" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.36" level="project" />
@@ -207,12 +208,18 @@
     </orderEntry>
     <orderEntry type="library" scope="RUNTIME" name="Gradle: io.micronaut:micronaut-inject-groovy:3.2.7" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework.boot:spring-boot-devtools:2.6.4" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: mysql:mysql-connector-java:8.0.28" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.glassfish.web:el-impl:2.2.1-b05" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.h2database:h2:1.4.200" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.tomcat:tomcat-jdbc:9.0.58" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.tomcat.embed:tomcat-embed-logging-log4j:8.5.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.grails:grails-codecs:5.1.5" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.javassist:javassist:3.28.0-GA" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.gradle:gradle-messaging:2.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.gradle:gradle-base-services:2.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.gradle:gradle-resources:2.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.gradle:gradle-base-services-groovy:2.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.protobuf:protobuf-java:3.17.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: javax.el:el-api:2.2.1-b04" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.tomcat:tomcat-juli:9.0.58" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.grails:grails-plugin-i18n:5.1.5" level="project" />
@@ -225,11 +232,17 @@
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.latencyutils:LatencyUtils:2.0.3" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.bertramlabs.plugins:asset-pipeline-core:3.0.7" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.sun.activation:jakarta.activation:1.2.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.guava:guava-jdk5:17.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.esotericsoftware.kryo:kryo:2.20" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.codehaus.groovy:groovy-ant:3.0.7" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: commons-logging:commons-logging:1.1.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.tukaani:xz:1.6" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.esotericsoftware.reflectasm:reflectasm:shaded:1.07" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.esotericsoftware.minlog:minlog:1.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.objenesis:objenesis:1.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.ant:ant-junit:1.10.9" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.ant:ant-antlr:1.10.9" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.codehaus.groovy:groovy-groovydoc:3.0.7" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.ow2.asm:asm:4.0" level="project" />
   </component>
 </module>

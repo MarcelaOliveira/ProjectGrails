@@ -57,9 +57,9 @@ const App = () => {
 
     const handleRegister = (event) => {
         if (getLocalStorage(event)) {
-           // api.get("").then(({data})=>{
-           //
-           // })
+           api.get("/UserController").then(({data})=>{
+
+           })
             setScreen("Register");
             notification.error({
                 message: `Cadastro já existente`,

@@ -168,12 +168,14 @@
           <element id="library" level="project" name="Gradle: io.micronaut:micronaut-json-core:3.3.4" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.13.1" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.13.1" />
+          <element id="library" level="project" name="Gradle: mysql:mysql-connector-java:8.0.28" />
           <element id="library" level="project" name="Gradle: org.glassfish.web:el-impl:2.2.1-b05" />
           <element id="library" level="project" name="Gradle: com.h2database:h2:1.4.200" />
           <element id="library" level="project" name="Gradle: org.apache.tomcat:tomcat-jdbc:9.0.58" />
           <element id="library" level="project" name="Gradle: org.apache.tomcat.embed:tomcat-embed-logging-log4j:8.5.2" />
           <element id="library" level="project" name="Gradle: org.grails:grails-codecs:5.1.5" />
           <element id="library" level="project" name="Gradle: org.javassist:javassist:3.28.0-GA" />
+          <element id="library" level="project" name="Gradle: com.google.protobuf:protobuf-java:3.17.2" />
           <element id="library" level="project" name="Gradle: javax.el:el-api:2.2.1-b04" />
           <element id="library" level="project" name="Gradle: org.apache.tomcat:tomcat-juli:9.0.58" />
           <element id="library" level="project" name="Gradle: org.grails:grails-plugin-i18n:5.1.5" />
@@ -192,6 +194,17 @@
           <element id="library" level="project" name="Gradle: org.apache.ant:ant-junit:1.10.9" />
           <element id="library" level="project" name="Gradle: org.apache.ant:ant-antlr:1.10.9" />
           <element id="library" level="project" name="Gradle: org.codehaus.groovy:groovy-groovydoc:3.0.7" />
+          <element id="library" level="project" name="Gradle: org.gradle:gradle-core:2.2" />
+          <element id="library" level="project" name="Gradle: org.gradle:gradle-messaging:2.2" />
+          <element id="library" level="project" name="Gradle: org.gradle:gradle-base-services:2.2" />
+          <element id="library" level="project" name="Gradle: org.gradle:gradle-resources:2.2" />
+          <element id="library" level="project" name="Gradle: org.gradle:gradle-base-services-groovy:2.2" />
+          <element id="library" level="project" name="Gradle: com.google.guava:guava-jdk5:17.0" />
+          <element id="library" level="project" name="Gradle: com.esotericsoftware.kryo:kryo:2.20" />
+          <element id="library" level="project" name="Gradle: com.esotericsoftware.reflectasm:reflectasm:shaded:1.07" />
+          <element id="library" level="project" name="Gradle: com.esotericsoftware.minlog:minlog:1.2" />
+          <element id="library" level="project" name="Gradle: org.objenesis:objenesis:1.2" />
+          <element id="library" level="project" name="Gradle: org.ow2.asm:asm:4.0" />
         </element>
       </element>
     </root>
