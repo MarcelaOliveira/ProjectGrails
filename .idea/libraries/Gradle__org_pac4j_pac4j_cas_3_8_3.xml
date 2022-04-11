@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.pac4j:pac4j-cas:3.8.3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.pac4j/pac4j-cas/3.8.3/30b3653dd4226f7cedad2fc68e31840ad8af735a/pac4j-cas-3.8.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.pac4j/pac4j-cas/3.8.3/9f5a6498e7d6f7332fd4be94403ad3a02bab9347/pac4j-cas-3.8.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

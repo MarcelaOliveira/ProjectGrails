@@ -5,6 +5,7 @@ import Welcome from "./Componentes/Welcome";
 import ViewAdm from "./Componentes/ViewAdm";
 import api from "./Services/APIAxios";
 
+
 import { notification } from "antd";
 import "./css/App.css"
 
@@ -56,38 +57,33 @@ const App = () => {
     };
 
     const handleRegister = (event) => {
-        if (getLocalStorage(event)) {
-           api.get("/UserController").then(({data})=>{
-
-           })
-            setScreen("Register");
-            notification.error({
+       api.post("/User", event ).then(e =>  setScreen("Login") )
+    .catch( e =>{
+          setScreen("Register")
+             notification.error({
                 message: `Cadastro já existente`,
                 description: "Verifique seu email, ou faça login",
-            });
-        } else {
-            const dbUser = getLocalStorage();
-            dbUser.push(event);
-            setLocalStorage(dbUser);
-            setScreen("Login");
-        }
+             })
+          }
+       )
     };
 
     const handleLogin = (e) => {
-        if (confirmSenha(e)) {
-            localStorage.setItem("logged", JSON.stringify(e.email));
-            if (confirmAdm(e)) {
-                setScreen("ViewAdm");
-            } else {
-                setScreen("Welcome");
-            }
-        } else {
-            setScreen("Login");
-            notification.error({
-                message: `Login mal sussecido`,
-                description: "Verifique seu email e senha",
-            });
-        }
+
+        // if (confirmSenha(e)) {
+        //     localStorage.setItem("logged", JSON.stringify(e.email));
+        //     if (confirmAdm(e)) {
+        //         setScreen("ViewAdm");
+        //     } else {
+        //         setScreen("Welcome");
+        //     }
+        // } else {
+        //     setScreen("Login");
+        //     notification.error({
+        //         message: `Login mal sussecido`,
+        //         description: "Verifique seu email e senha",
+        //     });
+        // }
     };
     const handleEditar = (editar) => {
         const users = getLocalStorage();
