@@ -3,7 +3,9 @@ import FormLogin from "./Componentes/Forms/FormLogin";
 import FormRegister from "./Componentes/Forms/FormRegister";
 import Welcome from "./Componentes/Welcome";
 import ViewAdm from "./Componentes/ViewAdm";
+import PageNotFound from "./Componentes/PageNotFound";
 import api from "./Services/APIAxios";
+import { Authentication }  from "./Services/Authentication"
 
 
 import { notification } from "antd";
@@ -70,20 +72,20 @@ const App = () => {
 
     const handleLogin = (e) => {
 
-        // if (confirmSenha(e)) {
-        //     localStorage.setItem("logged", JSON.stringify(e.email));
-        //     if (confirmAdm(e)) {
-        //         setScreen("ViewAdm");
-        //     } else {
-        //         setScreen("Welcome");
-        //     }
-        // } else {
-        //     setScreen("Login");
-        //     notification.error({
-        //         message: `Login mal sussecido`,
-        //         description: "Verifique seu email e senha",
-        //     });
-        // }
+        if (confirmSenha(e)) {
+            localStorage.setItem("logged", JSON.stringify(e.email));
+            if (confirmAdm(e)) {
+                setScreen("ViewAdm");
+            } else {
+                setScreen("Welcome");
+            }
+        } else {
+            setScreen("Login");
+            notification.error({
+                message: `Login mal sussecido`,
+                description: "Verifique seu email e senha",
+            });
+        }
     };
     const handleEditar = (editar) => {
         const users = getLocalStorage();
@@ -136,7 +138,7 @@ const App = () => {
             );
         case "Welcome":
             const email = JSON.parse(localStorage.getItem("logged"));
-            const data = getLocalStorage({ email: email });
+            const data = api.get()
             return (
                 <div>
                     <Welcome
@@ -162,8 +164,8 @@ const App = () => {
             );
         default:
             return (
-                <div className="register">
-                    <FormRegister onFinish={handleRegister} onClick={onClick} />
+                <div>
+                    <PageNotFound/>
                 </div>
             );
     }

@@ -1,6 +1,8 @@
 package projeto
 
 import grails.validation.ValidationException
+import security.Permission
+
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
@@ -26,9 +28,8 @@ class UserController {
     def show(Long id) {
         respond userService.get(id)
     }
-
     @Transactional
-    def save(User user) {
+    def save( ) {
         if (user == null) {
             render status: NOT_FOUND
             return
