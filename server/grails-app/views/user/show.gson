@@ -1,5 +1,3 @@
-import projeto.User
-
 model {
 	User user
 }

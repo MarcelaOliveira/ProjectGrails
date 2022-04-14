@@ -1,9 +1,8 @@
 package security
 
-import grails.compiler.GrailsCompileStatic
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
-
+import grails.compiler.GrailsCompileStatic
 
 @GrailsCompileStatic
 @EqualsAndHashCode(includes='username')
@@ -14,13 +13,17 @@ class User implements Serializable {
 
     String username
     String password
+    String email
+    String senha
+    String endereco
+    String telefone
     boolean enabled = true
     boolean accountExpired
     boolean accountLocked
     boolean passwordExpired
 
-    Set<Permission> getAuthorities() {
-        (UserPermission.findAllByUser(this) as List<UserPermission>)*.permission as Set<Permission>
+    Set<Role> getAuthorities() {
+        (UserRole.findAllByUser(this) as List<UserRole>)*.role as Set<Role>
     }
 
     static constraints = {

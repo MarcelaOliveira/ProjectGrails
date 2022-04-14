@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.grails.plugins:spring-security-core:4.0.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails.plugins/spring-security-core/4.0.4/8dffc7534bd7032e6e1400c5ba267ae3593a6e92/spring-security-core-4.0.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails.plugins/spring-security-core/4.0.4/1bfb10acf5b29e1f2224320f3bbce786c417a905/spring-security-core-4.0.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

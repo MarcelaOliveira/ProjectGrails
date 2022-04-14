@@ -1,0 +1,8 @@
+import projeto.Requestmap
+
+model {
+	Iterable<Requestmap> requestmapList
+}
+
+json tmpl.requestmap(requestmapList ?: [])
+
