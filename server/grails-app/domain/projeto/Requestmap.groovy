@@ -6,8 +6,8 @@ import groovy.transform.ToString
 import grails.compiler.GrailsCompileStatic
 
 @GrailsCompileStatic
-@EqualsAndHashCode(includes=['configAttribute', 'httpMethod', 'url'])
-@ToString(includes=['configAttribute', 'httpMethod', 'url'], cache=true, includeNames=true, includePackage=false)
+@EqualsAndHashCode(includes=['configAttribute', 'url'])
+@ToString(includes=['configAttribute', 'url'], cache=true, includeNames=true, includePackage=false)
 class Requestmap implements Serializable{
 
     private static final long serialVersionUID = 1
