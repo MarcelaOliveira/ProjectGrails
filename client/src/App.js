@@ -59,7 +59,7 @@ const App = () => {
     };
 
     const handleRegister = (event) => {
-       api.post("/User", event ).then(e =>  setScreen("Login") )
+       api.post("/user/save", event ).then(e =>  setScreen("Login") )
     .catch( e =>{
           setScreen("Register")
              notification.error({

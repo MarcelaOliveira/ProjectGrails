@@ -8,11 +8,11 @@ import org.junit.runner.Request
 
 class BootStrap {
     def listUrl = [
-            [ url: '/User/show', confgAttibute: 'ROLE_USER' ],
-            [ url: '/User/index',  confgAttibute: 'ROLE_ADMIN' ],
-            [ url: '/User/save', configAtribute: 'permitAll' ],
-            [ url: '/User/update/**', configureAtribute: 'ROLE_ADMIN, ROLE_USER' ],
-            [ url: '/User/delete/**', configureAtribute: 'ROLE_ADMIN, ROLE_USER' ],
+            [ url: '/user/show', confgAttibute: 'ROLE_USER' ],
+            [ url: '/user/index',  confgAttibute: 'ROLE_ADMIN' ],
+            [ url: '/user/save', configAtribute: 'permitAll' ],
+            [ url: '/user/update/**', configureAtribute: 'ROLE_ADMIN, ROLE_USER' ],
+            [ url: '/user/delete/**', configureAtribute: 'ROLE_ADMIN, ROLE_USER' ],
             [ url: '/j_spring_security_switch_user',  configAttribute: 'ROLE_SWITCH_USER,isFullyAuthenticated()' ]
     ]
 
@@ -27,12 +27,21 @@ class BootStrap {
                 new Requestmap(url: item.url, configAttribute: item.configAttribute).save()
             }
         }
+        for (String url in [
+                '/', '/index', '/index.gsp', '/**/favicon.ico',
+                '/assets/**', '/**/js/**', '/**/css/**', '/**/images/**',
+                '/login', '/login.*', '/login/*',
+                '/logout', '/logout.*', '/logout/*']) {
+            if(Requestmap.findByUrl( url ) == null) {
+                new Requestmap(url: url, configAttribute: 'permitAll').save()
+            }
+        }
     }
     @Transactional
     void addUsers(){
-        Role adm = Role.findByAuthority('ROLE_ADMIN')
-        if( adm == null ){
-            adm = new Role(authority: 'ROLE_ADMIN').save(flush: true)
+        Role admin = Role.findByAuthority('ROLE_ADMIN')
+        if( admin == null ){
+            admin = new Role(authority: 'ROLE_ADMIN').save(flush: true)
         }
 
         Role user = Role.findByAuthority('ROLE_USER')
@@ -40,23 +49,23 @@ class BootStrap {
             user = new Role(authority: 'ROLE_USER').save(flush: true)
         }
 
-        User admin = User.findByUsername("marcelaAdmin")
-        if(admin == null){
-            admin = new User(username: "marcelaAdmin", password: "12345678", email: "marcelaAdmin@gmail.com", telefone: "12345678", endereco: "Rua Tal", adm: false,
+        User administrador = User.findByUsername("marcelaAdmin")
+        if(administrador == null){
+            administrador = new User(username: "marcelaAdmin", password: "12345678", email: "marcelaAdmin@gmail.com", telefone: "12345678", endereco: "Rua Tal", adm: false,
             enabled: true, accountExpired: false, accountLocked: false,
                     passwordExpired: false).save(flush: true)
         }
-        User usu = User.findByUsername("marcelaUser")
-        if(usu == null){
-            usu = new User(username: "marcelaUser", password: "1234", email: "marcelaUser@gmail.com", telefone: "12345678", endereco: "Rua Tal", adm: false,
+        User user_comum = User.findByUsername("marcelaUser")
+        if(user_comum == null){
+            user_comum = new User(username: "marcelaUser", password: "1234", email: "marcelaUser@gmail.com", telefone: "12345678", endereco: "Rua Tal", adm: false,
                     enabled: true, accountExpired: false, accountLocked: false,
                     passwordExpired: false).save(flush: true)
         }
-        if(UserRole.findByUserAndRole(adm, admin) == null){
-            new UserRole(user: adm, role: admin).save(flush: true)
+        if(UserRole.findByUserAndRole(administrador, admin)){
+            new UserRole(user: administrador, rule: admin).save(flush: true)
         }
-        if(UserRole.findByUserAndRole(user, usu) == null){
-            new UserRole(user: user, role:usu).save(flush: true)
+        if(UserRole.findByUserAndRole(user_comum, user) == null){
+            new UserRole(user: user_comum, rule: user).save(flush: true)
         }
 
     }
