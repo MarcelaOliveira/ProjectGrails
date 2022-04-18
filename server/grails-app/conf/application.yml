@@ -168,7 +168,7 @@ environments:
     development:
         dataSource:
             dbCreate: create-drop
-            url: jdbc:mysql://localhost:3306/dbUsers
+            url: jdbc:mysql://localhost:3306/dbusers
     test:
         dataSource:
             dbCreate: update

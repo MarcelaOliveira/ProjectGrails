@@ -203,7 +203,6 @@
           <element id="library" level="project" name="Gradle: org.apache.tomcat:tomcat-juli:9.0.58" />
           <element id="library" level="project" name="Gradle: javax.el:javax.el-api:3.0.1-b06" />
           <element id="library" level="project" name="Gradle: org.glassfish:javax.el:3.0.1-b12" />
-          <element id="library" level="project" name="Gradle: commons-codec:commons-codec:1.15" />
           <element id="library" level="project" name="Gradle: com.sun.xml.bind:jaxb-impl:2.3.1" />
           <element id="library" level="project" name="Gradle: io.micronaut.spring:micronaut-spring:4.1.0" />
           <element id="library" level="project" name="Gradle: io.projectreactor:reactor-core:3.4.15" />
@@ -221,6 +220,25 @@
           <element id="library" level="project" name="Gradle: org.apache.ant:ant-antlr:1.10.9" />
           <element id="library" level="project" name="Gradle: org.codehaus.groovy:groovy-groovydoc:3.0.7" />
           <element id="library" level="project" name="Gradle: org.ow2.asm:asm:4.0" />
+          <element id="library" level="project" name="Gradle: org.grails.plugins:spring-security-rest:3.0.1" />
+          <element id="library" level="project" name="Gradle: org.pac4j:pac4j-oauth:3.8.3" />
+          <element id="library" level="project" name="Gradle: org.pac4j:pac4j-cas:3.8.3" />
+          <element id="library" level="project" name="Gradle: org.pac4j:pac4j-core:3.8.3" />
+          <element id="library" level="project" name="Gradle: org.jasig.cas.client:cas-client-core:3.6.1" />
+          <element id="library" level="project" name="Gradle: com.google.guava:guava:23.6-jre" />
+          <element id="library" level="project" name="Gradle: org.bouncycastle:bcprov-jdk15on:1.64" />
+          <element id="library" level="project" name="Gradle: commons-codec:commons-codec:1.15" />
+          <element id="library" level="project" name="Gradle: com.github.scribejava:scribejava-apis:5.6.0" />
+          <element id="library" level="project" name="Gradle: org.jasig.cas.client:cas-client-support-saml:3.5.0" />
+          <element id="library" level="project" name="Gradle: org.bouncycastle:bcpkix-jdk15on:1.63" />
+          <element id="library" level="project" name="Gradle: com.google.j2objc:j2objc-annotations:1.1" />
+          <element id="library" level="project" name="Gradle: org.codehaus.mojo:animal-sniffer-annotations:1.14" />
+          <element id="library" level="project" name="Gradle: org.checkerframework:checker-compat-qual:2.0.0" />
+          <element id="library" level="project" name="Gradle: com.github.stephenc.jcip:jcip-annotations:1.0-1" />
+          <element id="library" level="project" name="Gradle: com.github.scribejava:scribejava-core:5.6.0" />
+          <element id="library" level="project" name="Gradle: joda-time:joda-time:2.7" />
+          <element id="library" level="project" name="Gradle: com.nimbusds:nimbus-jose-jwt:9.15.2" />
+          <element id="library" level="project" name="Gradle: com.google.code.findbugs:jsr305:3.0.2" />
         </element>
       </element>
     </root>
