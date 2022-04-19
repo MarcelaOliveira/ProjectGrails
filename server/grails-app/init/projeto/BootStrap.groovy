@@ -4,15 +4,15 @@ import grails.gorm.transactions.Transactional
 import security.User
 import security.Role
 import security.UserRole
-import org.junit.runner.Request
+import projeto.Requestmap
 
 class BootStrap {
     def listUrl = [
-            [ url: '/user/show', confgAttibute: 'ROLE_USER' ],
-            [ url: '/user/index',  confgAttibute: 'ROLE_ADMIN' ],
-            [ url: '/user/save', configAtribute: 'permitAll' ],
-            [ url: '/user/update/**', configureAtribute: 'ROLE_ADMIN, ROLE_USER' ],
-            [ url: '/user/delete/**', configureAtribute: 'ROLE_ADMIN, ROLE_USER' ],
+            [ url: '/user/show', configAttribute: 'ROLE_USER' ],
+            [ url: '/user/index',  configAttribute: 'ROLE_ADMIN' ],
+            [ url: '/user/save', configAttribute: 'permitAll' ],
+            [ url: '/user/update/**',  configAttribute: 'ROLE_ADMIN, ROLE_USER' ],
+            [ url: '/user/delete/**',  configAttribute: 'ROLE_ADMIN, ROLE_USER' ],
             [ url: '/j_spring_security_switch_user',  configAttribute: 'ROLE_SWITCH_USER,isFullyAuthenticated()' ]
     ]
 
@@ -25,15 +25,6 @@ class BootStrap {
         for( item in listUrl){
             if(Requestmap.findByUrl(item.url) == null){
                 new Requestmap(url: item.url, configAttribute: item.configAttribute).save()
-            }
-        }
-        for (String url in [
-                '/', '/index', '/index.gsp', '/**/favicon.ico',
-                '/assets/**', '/**/js/**', '/**/css/**', '/**/images/**',
-                '/login', '/login.*', '/login/*',
-                '/logout', '/logout.*', '/logout/*']) {
-            if(Requestmap.findByUrl( url ) == null) {
-                new Requestmap(url: url, configAttribute: 'permitAll').save()
             }
         }
     }
@@ -51,13 +42,13 @@ class BootStrap {
 
         User administrador = User.findByUsername("marcelaAdmin")
         if(administrador == null){
-            administrador = new User(username: "marcelaAdmin", password: "12345678", email: "marcelaAdmin@gmail.com", telefone: "12345678", endereco: "Rua Tal", adm: false,
+            administrador = new User(username: "marcelaAdmin", password: "12345678", email: "marcelaAdmin@gmail.com", telefone: "12345678", endereco: "Rua Tal",
             enabled: true, accountExpired: false, accountLocked: false,
                     passwordExpired: false).save(flush: true)
         }
         User user_comum = User.findByUsername("marcelaUser")
         if(user_comum == null){
-            user_comum = new User(username: "marcelaUser", password: "1234", email: "marcelaUser@gmail.com", telefone: "12345678", endereco: "Rua Tal", adm: false,
+            user_comum = new User(username: "marcelaUser", password: "1234", email: "marcelaUser@gmail.com", telefone: "12345678", endereco: "Rua Tal",
                     enabled: true, accountExpired: false, accountLocked: false,
                     passwordExpired: false).save(flush: true)
         }

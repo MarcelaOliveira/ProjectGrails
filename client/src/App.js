@@ -59,7 +59,7 @@ const App = () => {
     };
 
     const handleRegister = (event) => {
-       api.post("/user/save", event ).then(e =>  setScreen("Login") )
+       api.post("api/user/save", event ).then(e =>  setScreen("Login") )
     .catch( e =>{
           setScreen("Register")
              notification.error({
@@ -71,21 +71,26 @@ const App = () => {
     };
 
     const handleLogin = (e) => {
-
-        if (confirmSenha(e)) {
-            localStorage.setItem("logged", JSON.stringify(e.email));
-            if (confirmAdm(e)) {
-                setScreen("ViewAdm");
-            } else {
-                setScreen("Welcome");
-            }
-        } else {
-            setScreen("Login");
-            notification.error({
-                message: `Login mal sussecido`,
-                description: "Verifique seu email e senha",
-            });
-        }
+        // api.post("login/auth") .then(response=>{
+        //     if(response.success){
+        //         Authentication.logIn()
+        //     }
+        // })
+        //
+        // if (confirmSenha(e)) {
+        //     localStorage.setItem("logged", JSON.stringify(e.email));
+        //     if (confirmAdm(e)) {
+        //         setScreen("ViewAdm");
+        //     } else {
+        //         setScreen("Welcome");
+        //     }
+        // } else {
+        //     setScreen("Login");
+        //     notification.error({
+        //         message: `Login mal sussecido`,
+        //         description: "Verifique seu email e senha",
+        //     });
+        // }
     };
     const handleEditar = (editar) => {
         const users = getLocalStorage();

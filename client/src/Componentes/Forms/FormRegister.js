@@ -14,7 +14,7 @@ import {
 import "antd/dist/antd.css";
 
 export default function FormCadastro(props) {
-  const { nome, email, endereco, telefone, senha, confSenha, onClick } = props;
+  const { username, email, endereco, telefone, senha, confSenha, onClick } = props;
   const [values, setValues] = useState({});
   const [erro, setErro] = useState({});
   const [buttonState, setButtonState] = useState();
@@ -24,8 +24,8 @@ export default function FormCadastro(props) {
     setValues(stat);
   };
 
-  const onSave = ({senha, confSenha}) => {
-    if (senha === confSenha) {
+  const onSave = ({password, confSenha}) => {
+    if (password === confSenha) {
       props.onFinish(values);
     } else {
       setErro("Senha e confirmar senha devem ser iguais!");
@@ -77,8 +77,8 @@ export default function FormCadastro(props) {
                 onFinishFailed={onFinishFailed}
               >
                 <Form.Item
-                  name="nome"
-                  value={nome}
+                  name="username"
+                  value={username}
                   onChange={setInputs}
                   rules={[
                     {
@@ -89,7 +89,7 @@ export default function FormCadastro(props) {
                 >
                   <Input
                     prefix={<UserOutlined />}
-                    name="nome"
+                    name="username"
                     className="input"
                     type="text"
                     placeholder="Nome"
@@ -152,7 +152,7 @@ export default function FormCadastro(props) {
                   />
                 </Form.Item>
                 <Form.Item
-                  name="senha"
+                  name="password"
                   placeholder="Senha"
                   iconRender={(visible) =>
                     visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
@@ -168,7 +168,7 @@ export default function FormCadastro(props) {
                 >
                   <Input.Password
                     prefix={<UnlockOutlined />}
-                    name="senha"
+                    name="password"
                     className="input"
                     type="password"
                     placeholder="Senha"
