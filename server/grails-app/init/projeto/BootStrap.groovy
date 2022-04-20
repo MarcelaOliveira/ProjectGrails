@@ -11,6 +11,7 @@ class BootStrap {
             [ url: '/user/show', configAttribute: 'ROLE_USER' ],
             [ url: '/user/index',  configAttribute: 'ROLE_ADMIN' ],
             [ url: '/user/save', configAttribute: 'permitAll' ],
+            [ url: '/user/getUsername', configAttribute: 'permitAll' ],
             [ url: '/user/update/**',  configAttribute: 'ROLE_ADMIN, ROLE_USER' ],
             [ url: '/user/delete/**',  configAttribute: 'ROLE_ADMIN, ROLE_USER' ],
             [ url: '/j_spring_security_switch_user',  configAttribute: 'ROLE_SWITCH_USER,isFullyAuthenticated()' ]
@@ -52,11 +53,11 @@ class BootStrap {
                     enabled: true, accountExpired: false, accountLocked: false,
                     passwordExpired: false).save(flush: true)
         }
-        if(UserRole.findByUserAndRole(administrador, admin)){
-            new UserRole(user: administrador, rule: admin).save(flush: true)
+        if(UserRole.findByUserAndRole(administrador, admin) == null){
+            new UserRole(user: administrador, role: admin).save(flush: true)
         }
         if(UserRole.findByUserAndRole(user_comum, user) == null){
-            new UserRole(user: user_comum, rule: user).save(flush: true)
+            new UserRole(user: user_comum, role: user).save(flush: true)
         }
 
     }

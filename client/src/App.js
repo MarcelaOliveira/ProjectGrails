@@ -70,13 +70,14 @@ const App = () => {
        )
     };
 
-    const handleLogin = (e) => {
-        // api.post("login/auth") .then(response=>{
-        //     if(response.success){
-        //         Authentication.logIn()
-        //     }
-        // })
-        //
+    const handleLogin = (user) => {
+
+            Authentication.logIn({ user: user}).then(()=>{
+                setScreen("Welcome")
+            })
+                .catch(()=>
+                    console.log("Deu ruim")
+                )
         // if (confirmSenha(e)) {
         //     localStorage.setItem("logged", JSON.stringify(e.email));
         //     if (confirmAdm(e)) {
@@ -109,14 +110,7 @@ const App = () => {
 
     const handleDeletar = (deletar) => {
         deletar.preventDefault();
-        const users = getLocalStorage();
         const usuario = JSON.parse(localStorage.getItem("logged"));
-        const newData = users.filter((user) => {
-            return user.email !== usuario;
-        });
-        setLocalStorage(newData);
-        localStorage.removeItem("logged");
-        setScreen("Login");
     };
 
     const onClick = (e) => {

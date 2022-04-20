@@ -202,7 +202,7 @@ export default function FormCadastro(props) {
                     <spam>{erro}</spam>
                   </center>
                 )}
-                <Checkbox name="adm" value="true" onChange={setInputs}>
+                <Checkbox name="adm" value={true} onChange={setInputs}>
                   Sou administrador
                 </Checkbox>
                 <Button htmlType="submit" className="register">

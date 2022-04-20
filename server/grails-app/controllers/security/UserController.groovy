@@ -15,7 +15,8 @@ import grails.gorm.transactions.Transactional
 class UserController {
 
     UserService userService
-
+    RoleService roleService
+    UserRoleService userRoleService
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -28,15 +29,31 @@ class UserController {
         respond userService.get(id)
     }
 
+    def getUsername( ){
+        def username = "%"+params.username+"%"
+        def user = User.findByUsernameIlike(username)
+        respond user: user
+    }
+
     @Transactional
     def save( ) {
-        params = params.putAll(JSON.parse(request.getReader()) as Map)
+        params.putAll(JSON.parse(request.getReader()) as Map)
         User usu =  User.findByUsername(params.username )
+        User user = new User(
+                username: params.username,
+                password: params.password,
+                email: params.email,
+                endereco: params.endereco,
+                telefone: params.telefone,
+                adm: params.adm?: false ,
+                enabled: false,
+                accountExpired: false,
+                accountLocked: false,
+                passwordExpired: false
+        )
+
         if (usu == null) {
             try {
-
-               User user = new User(username: params.username, password: params.password, email: params.email, endereco: params.endereco, telefone:  params.telefone, enabled: false,  accountExpired: false, accountLocked: false,
-                        passwordExpired: false )
                 userService.save(user)
                 if (user.hasErrors()) {
                     transactionStatus.setRollbackOnly()
@@ -44,22 +61,12 @@ class UserController {
                     return
                 }
                 if(user.adm == true){
-
                     Role admin = Role.findByAuthority('ROLE_ADMIN')
-                    if( admin == null ){
-                        admin = new Role(authority: 'ROLE_ADMIN').save(flush: true)
-                    }
-                    if(UserRole.findByUserAndRole(user, admin)){
-                        new UserRole(user: user, rule: admin).save(flush: true)
-                    }
+                    new UserRole(user: user, role: admin).save(flush: true)
+
                 }else{
                     Role user_comum = Role.findByAuthority('ROLE_USER')
-                    if(user == null){
-                        user = new Role(authority: 'ROLE_USER').save(flush: true)
-                    }
-                    if(UserRole.findByUserAndRole(user, user_comum) == null){
-                        new UserRole(user: user, rule: user_comum).save(flush: true)
-                    }
+                    new UserRole(user: user, role: user_comum).save(flush: true)
                 }
 
             } catch (ValidationException e) {
@@ -71,7 +78,7 @@ class UserController {
             return
         }
 
-        respond  user, [status: CREATED, view:"show"]
+        respond user, [status: CREATED, view:"show"]
     }
 
     @Transactional

@@ -16,7 +16,7 @@ class User implements Serializable {
     String email
     String endereco
     String telefone
-    Boolean adm = false
+    boolean adm = false
     boolean enabled = true
     boolean accountExpired
     boolean accountLocked
@@ -29,6 +29,7 @@ class User implements Serializable {
     static constraints = {
         password nullable: false, blank: false, password: true
         username nullable: false, blank: false, unique: true
+        adm nullable: true
     }
 
     static mapping = {

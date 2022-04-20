@@ -63,6 +63,25 @@ export default function FormLogin(props) {
                 onFinishFailed={onFinishFailed}
               >
                 <Form.Item
+                    name="username"
+                    value={props.username}
+                    onChange={setInputs}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Por favor preencha todos os campos!",
+                      },
+                    ]}
+                >
+                  <Input
+                      prefix={<MailOutlined />}
+                      name="username"
+                      className="input"
+                      type="text"
+                      placeholder="Name"
+                  />
+                </Form.Item>
+                <Form.Item
                   name="email"
                   value={props.email}
                   onChange={setInputs}

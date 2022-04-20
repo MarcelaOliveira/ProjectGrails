@@ -3,13 +3,20 @@ import { notification } from "antd";
 import {SERVER_URL} from "../config"
 
 const setUser = (user) =>{
-    if(typeof user === undefined){
+    if(!user){
         notification.error({
-            message: `Cadastro já existente`,
-            description: "Verifique seu email, ou faça login",
+            message: `Login invalido`,
+            description: "Verifique seu email, ou faça cadastro",
         });
     }else{
-        localStorage.setItem("logged", JSON.stringify(user));
+        api.get(`api/user/getUsername?username=${user.user.username} `).then(()=>{
+            api.get("api/login", user).then(response =>{
+                if(response.success){
+                    console.log(response)
+                }
+            })
+
+        })
     }
 }
 const getUserById = () =>{
