@@ -8,13 +8,15 @@ import projeto.Requestmap
 
 class BootStrap {
     def listUrl = [
-            [ url: '/user/show', configAttribute: 'ROLE_USER' ],
-            [ url: '/user/index',  configAttribute: 'ROLE_ADMIN' ],
-            [ url: '/user/save', configAttribute: 'permitAll' ],
-            [ url: '/user/getUsername', configAttribute: 'permitAll' ],
-            [ url: '/user/update/**',  configAttribute: 'ROLE_ADMIN, ROLE_USER' ],
-            [ url: '/user/delete/**',  configAttribute: 'ROLE_ADMIN, ROLE_USER' ],
-            [ url: '/j_spring_security_switch_user',  configAttribute: 'ROLE_SWITCH_USER,isFullyAuthenticated()' ]
+            [ url: '/api/user/show', configAttribute: 'ROLE_USER' ],
+            [ url: '/api/user/index',  configAttribute: 'ROLE_ADMIN' ],
+            [ url: '/api/user/save', configAttribute: 'permitAll'],
+            [ url: '/api/user/getUsername', configAttribute: 'permitAll' ],
+            [ url: '/api/user/update/**',  configAttribute: 'ROLE_ADMIN, ROLE_USER' ],
+            [ url: '/api/login/**', configAttribute: 'permitAll'],
+            [ url: '/api/user/delete/**',  configAttribute: 'ROLE_ADMIN, ROLE_USER' ],
+            [ url: '/api/oauth/access_token',    configAttribute: 'permitAll' ],
+            [ url: '/api/j_spring_security_switch_user',  configAttribute: 'ROLE_SWITCH_USER,isFullyAuthenticated()' ]
     ]
 
     def init = {

@@ -9,8 +9,8 @@ const setUser = (user) =>{
             description: "Verifique seu email, ou faça cadastro",
         });
     }else{
-        api.get(`api/user/getUsername?username=${user.user.username} `).then(()=>{
-            api.get("api/login", user).then(response =>{
+        api.get(`api/user/getUsername?email=${user.user.email} `).then(()=>{
+            api.post("apí/login", user).then(response =>{
                 if(response.success){
                     console.log(response)
                 }

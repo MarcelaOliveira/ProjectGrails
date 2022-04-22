@@ -105,8 +105,6 @@ grails:
                 className: projeto.Requestmap
                 filterChain:
                     chainMap:
-                        - pattern: /login/**
-                          filters: none
                         - pattern: /assets/**
                           filters: none
                         - pattern: /**/js/**

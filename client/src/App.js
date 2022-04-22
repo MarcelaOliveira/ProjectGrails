@@ -59,7 +59,7 @@ const App = () => {
     };
 
     const handleRegister = (event) => {
-       api.post("api/user/save", event ).then(e =>  setScreen("Login") )
+       api.post("/api/user/save", event ).then(e =>  setScreen("Login") )
     .catch( e =>{
           setScreen("Register")
              notification.error({
@@ -137,11 +137,11 @@ const App = () => {
             );
         case "Welcome":
             const email = JSON.parse(localStorage.getItem("logged"));
-            const data = api.get()
+            // const data = api.get()
             return (
                 <div>
                     <Welcome
-                        user={data}
+                        // user={data}
                         deslogar={deslogar}
                         onSubmit={handleEditar}
                         onDeletar={handleDeletar}

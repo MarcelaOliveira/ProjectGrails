@@ -1,13 +1,8 @@
 import security.User
 
 model {
-    User user
+    Iterable<User> model
 }
-json{
-    id user.id
-    username user.username
-    email user.email
-    password user.password
-    endereco user.endereco
-    telefone user.telefone
+json {
+    model tmpl.user( model )
 }
