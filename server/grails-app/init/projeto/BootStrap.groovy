@@ -4,7 +4,6 @@ import grails.gorm.transactions.Transactional
 import security.User
 import security.Role
 import security.UserRole
-import projeto.Requestmap
 
 class BootStrap {
     def listUrl = [
@@ -13,9 +12,9 @@ class BootStrap {
             [ url: '/api/user/save', configAttribute: 'permitAll'],
             [ url: '/api/user/getUsername', configAttribute: 'permitAll' ],
             [ url: '/api/user/update/**',  configAttribute: 'ROLE_ADMIN, ROLE_USER' ],
-            [ url: '/api/login/**', configAttribute: 'permitAll'],
+            [ url: 'api/login/**', configAttribute: 'permitAll'],
             [ url: '/api/user/delete/**',  configAttribute: 'ROLE_ADMIN, ROLE_USER' ],
-            [ url: '/api/oauth/access_token',    configAttribute: 'permitAll' ],
+            [ url: '/oauth/access_token',    configAttribute: 'permitAll' ],
             [ url: '/api/j_spring_security_switch_user',  configAttribute: 'ROLE_SWITCH_USER,isFullyAuthenticated()' ]
     ]
 

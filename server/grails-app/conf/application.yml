@@ -105,6 +105,8 @@ grails:
                 className: projeto.Requestmap
                 filterChain:
                     chainMap:
+                        - pattern: /login/**
+                          filters: none
                         - pattern: /assets/**
                           filters: none
                         - pattern: /**/js/**
@@ -162,7 +164,7 @@ dataSource:
     driverClassName: com.mysql.cj.jdbc.Driver
     dialect: org.hibernate.dialect.MySQL8Dialect
     username: root
-    password: 'root'
+    password: "root"
 
 environments:
     development:
