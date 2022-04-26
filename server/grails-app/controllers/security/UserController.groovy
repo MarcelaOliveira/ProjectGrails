@@ -31,8 +31,8 @@ class UserController {
 
     def getUsername( ){
         def model = [ : ]
-        def email = "%"+params.email+"%"
-        User user = User.findByEmailIlike(email)
+        def username = "%"+params.username+"%"
+        User user = User.findByUsernameIlike(username)
         model.put("user", user)
         respond model
     }

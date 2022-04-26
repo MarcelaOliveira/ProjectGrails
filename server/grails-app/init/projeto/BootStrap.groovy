@@ -8,13 +8,13 @@ import security.UserRole
 class BootStrap {
     def listUrl = [
             [ url: '/api/user/show', configAttribute: 'ROLE_USER' ],
-            [ url: '/api/user/index',  configAttribute: 'ROLE_ADMIN' ],
+            [ url: '/api/user',  configAttribute: 'ROLE_ADMIN' ],
             [ url: '/api/user/save', configAttribute: 'permitAll'],
-            [ url: '/api/user/getUsername', configAttribute: 'permitAll' ],
+            [ url: '/api/user/getUsername', configAttribute: 'ROLE_ADMIN, ROLE_USER' ],
             [ url: '/api/user/update/**',  configAttribute: 'ROLE_ADMIN, ROLE_USER' ],
-            [ url: 'api/login/**', configAttribute: 'permitAll'],
             [ url: '/api/user/delete/**',  configAttribute: 'ROLE_ADMIN, ROLE_USER' ],
             [ url: '/oauth/access_token',    configAttribute: 'permitAll' ],
+            [ url: '/api/login/**', configAttribute: 'permitAll' ],
             [ url: '/api/j_spring_security_switch_user',  configAttribute: 'ROLE_SWITCH_USER,isFullyAuthenticated()' ]
     ]
 

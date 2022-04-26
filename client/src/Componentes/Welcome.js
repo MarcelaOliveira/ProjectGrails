@@ -6,28 +6,38 @@ import { Table, Row, Col, Button, Card } from "antd";
 import { FormOutlined, DeleteOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 
-function Welcome({ user, deslogar, onSubmit, onDeletar }) {
+function Welcome({user, deslogar}) {
   const [buttonState, setButtonState] = useState();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isModalDeleteVisible, setIsModalDleteVisible] = useState(false);
-
-  const handleSizeChange = (e) => {
-    setButtonState( e.target.value );
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-    setIsModalDleteVisible( false);
-  };
-
-  const handleCancelDelite = () => {
-    setIsModalDleteVisible( false)
-  }
   const showModal = () => {
     setIsModalVisible(true);
   };
   const showModalDelete = () => {
-    setIsModalDleteVisible(true);
+    setIsModalVisible(true);
+  };
+
+  const handleDeletar = (deletar) => {
+    // deletar.preventDefault();
+    // const usuario = JSON.parse(localStorage.getItem("logged"));
+  };
+
+  const handleEditar = (editar) => {
+    // const users = getLocalStorage();
+    // const usuario = JSON.parse(localStorage.getItem("logged"));
+    // const newData = users.map((user) => {
+    //   if (user.email === usuario) {
+    //     return { ...editar };
+    //   } else {
+    //     return users;
+    //   }
+    // });
+    // setLocalStorage(newData);
+    // localStorage.setItem("logged", JSON.stringify(editar.email));
+    // window.location.reload();
+  };
+
+  const handleSizeChange = (e) => {
+    setButtonState( e.target.value );
   };
 
   const size = buttonState;
@@ -78,7 +88,7 @@ function Welcome({ user, deslogar, onSubmit, onDeletar }) {
   const data = [
     {
       key: "1",
-      nome: user.nome,
+      nome: user.username,
       email: user.email,
       endereco: user.endereco,
       telefone: user.telefone,
@@ -96,23 +106,18 @@ function Welcome({ user, deslogar, onSubmit, onDeletar }) {
           style={{ marginTop: 80, width: 1200 }}
         >
           <div justify="space-around" align="middle">
-            <h1>Welcome, {user.nome}</h1>
+            {/*<h1>Welcome, {user.nome}</h1>*/}
           </div>
           <Row justify="space-around" align="middle">
             <Col span={18}>
               <Table columns={columns} dataSource={data} pagination={false} />
-              <ModalEditar
-                user={user}
-                onSubmit={onSubmit}
-                isModalVisible={isModalVisible}
-                handleCancel={handleCancel}
-              />
-              <ModalDeletar
-                isModalDeleteVisible={isModalDeleteVisible}
-                isModalVisible={handleCancel}
-                onSubmit={onDeletar}
-                handleCancel={handleCancel}
-              />
+              {/*<ModalEditar*/}
+              {/*  // user={user}*/}
+              {/*  onSubmit={handleEditar}*/}
+              {/*/>*/}
+              {/*<ModalDeletar*/}
+              {/*  onSubmit={handleDeletar}*/}
+              {/*/>*/}
             </Col>
           </Row>
 

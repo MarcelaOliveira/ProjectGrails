@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyledForms } from "./StyledForms";
 import { Row, Col, Card, Form, Input, Button } from "antd";
-import { MailOutlined, UnlockOutlined } from "@ant-design/icons";
+import { UserOutlined,MailOutlined, UnlockOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
@@ -46,7 +46,7 @@ export default function FormLogin(props) {
             >
               <img
                 alt="Login"
-                src="https://www.onebharatpharmacy.com/login/svg/admin-img.svg"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw3WjdBlfnTxBbIiHYsilvSD-BcylWs5HfuVvdE7xoI3T5N-sR4A2i1BVlqu4tExfFvCI&usqp=CAU"
               />
             </Col>
             <Col
@@ -74,7 +74,7 @@ export default function FormLogin(props) {
                     ]}
                 >
                   <Input
-                      prefix={<MailOutlined />}
+                      prefix={<UserOutlined/>}
                       name="username"
                       className="input"
                       type="text"
@@ -102,12 +102,12 @@ export default function FormLogin(props) {
                 </Form.Item>
 
                 <Form.Item
-                  name="senha"
+                  name="password"
                   placeholder="Senha"
                   iconRender={(visible) =>
                     visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                   }
-                  value={props.senha}
+                  value={props.password}
                   onChange={setInputs}
                   rules={[
                     {
@@ -118,7 +118,7 @@ export default function FormLogin(props) {
                 >
                   <Input.Password
                     prefix={<UnlockOutlined />}
-                    name="senha"
+                    name="password"
                     className="input"
                     type="password"
                     placeholder="Senha"

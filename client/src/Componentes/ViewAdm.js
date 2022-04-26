@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 
 export default function ViwAdm({ users, deslogar }) {
   const [buttonState, setButtonState] = useState();
-
+  console.log(users);
   let data = [];
   const handleSizeChange = (e) => {
     setButtonState(e.target.value );
@@ -38,8 +38,8 @@ export default function ViwAdm({ users, deslogar }) {
     users &&
       users.map((user) =>
         data.push({
-          key: user.nome,
-          nome: user.nome,
+          key: user.id,
+          nome: user.username,
           email: user.email,
           endereco: user.endereco,
           telefone: user.telefone,

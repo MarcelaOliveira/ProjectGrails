@@ -6,6 +6,7 @@ import ViewAdm from "./Componentes/ViewAdm";
 import PageNotFound from "./Componentes/PageNotFound";
 import api from "./Services/APIAxios";
 import { Authentication }  from "./Services/Authentication"
+import headers from "./Services/Headers";
 
 
 import { notification } from "antd";
@@ -13,6 +14,7 @@ import "./css/App.css"
 
 const App = () => {
     const [screen, setScreen] = useState("Register");
+    const [data, setData] =  useState({});
 
     const getLocalStorage = (usuario) => {
         const dbUserStorage = localStorage.getItem("dbUser");
@@ -33,29 +35,63 @@ const App = () => {
     };
 
     useEffect(() => {
-        let user = localStorage.getItem("logged");
-        if (user != null) {
-            if (confirmAdm(user)) {
-                setScreen("ViewAdm");
-            } else {
-                setScreen("Welcome");
+        let user = JSON.parse(localStorage.getItem("dbUser"));
+        const header = {headers}
+        if(user){
+            const { roles } = user
+            if (user != null || Object.values(user).length > 0) {
+                if(roles.includes("ROLE_ADMIN")){
+                    api.get('/api/user', {headers: header.headers}).then(values=>{
+                            if (values.data == "undefined" || !values.data) {
+                                notification.error({
+                                    message: `Login invalido`,
+                                    description: "Verifique seu email, ou faça cadastro",
+                                });
+                            } else {
+                                setData(values.data);
+                                setScreen("ViewAdm");
+                            }
+                        }
+                    ).catch( ()=>{
+                        notification.error({
+                            message: `Login invalido`,
+                            description: "Verifique seu email, ou faça cadastro",
+                        });
+                        setScreen("Login");
+                    });
+                } else {
+                    api.get(`api/user/getUsername?username=${user.username}`,  header).then(values=>{
+                        if (values.data == "undefined" || !values.data) {
+                            notification.error({
+                                message: `Login invalido`,
+                                description: "Verifique seu email, ou faça cadastro",
+                            });
+                        } else {
+                            setData(values.data);
+                            setScreen("Welcome");
+                        }
+                    }).catch( ()=>{
+                            notification.error({
+                                message: `Login invalido`,
+                                description: "Faça login!",
+                            });
+                            setScreen("Login");
+                        }
+                    )
+                }
+        }else{
+                setScreen("Login");
             }
         } else {
-            setScreen("Register");
+            setScreen("Login");
         }
     }, []);
 
-    const confirmSenha = ({ email, senha}) => {
-        const dbUser = getLocalStorage();
-        return dbUser.find(
-            ({email, senha}) => email === email && senha === senha
-        );
-    };
-    const confirmAdm = (user) => {
-        const dbUser = getLocalStorage();
-        return dbUser.find(
-            ({email, adm}) => email === email && adm === "adm"
-        );
+
+    const deslogar = (e) => {
+        e.preventDefault();
+        setScreen("Login");
+        localStorage.removeItem("dbUser");
     };
 
     const handleRegister = (event) => {
@@ -71,47 +107,63 @@ const App = () => {
     };
 
     const handleLogin = (user) => {
+        api.post("/api/login", user).then(response =>{
+            if(response.data){
+                Authentication.logIn(response.data).then(()=>{
+                    const header = {headers}
+                    if(response.data.roles.includes('ROLE_ADMIN')){
+                        api.get('/api/user', {headers: header.headers}).then(values=>{
+                            if (values.data == "undefined" || !values.data) {
+                                notification.error({
+                                    message: `Login invalido`,
+                                    description: "Verifique seu email, ou faça cadastro",
+                                });
+                            } else {
+                                setData(values.data);
+                                setScreen("ViewAdm");
+                            }
+                            }
+                        ).catch( ()=>{
+                            notification.error({
+                                message: `Login invalido`,
+                                description: "Verifique seu email, ou faça cadastro",
+                            });
+                            setScreen("Login");
+                        });
+                    }else{
 
-            Authentication.logIn({ user: user}).then(()=>{
-                setScreen("Welcome")
-            })
-                .catch(()=>
-                    console.log("Deu ruim")
-                )
-        // if (confirmSenha(e)) {
-        //     localStorage.setItem("logged", JSON.stringify(e.email));
-        //     if (confirmAdm(e)) {
-        //         setScreen("ViewAdm");
-        //     } else {
-        //         setScreen("Welcome");
-        //     }
-        // } else {
-        //     setScreen("Login");
-        //     notification.error({
-        //         message: `Login mal sussecido`,
-        //         description: "Verifique seu email e senha",
-        //     });
-        // }
-    };
-    const handleEditar = (editar) => {
-        const users = getLocalStorage();
-        const usuario = JSON.parse(localStorage.getItem("logged"));
-        const newData = users.map((user) => {
-            if (user.email === usuario) {
-                return { ...editar };
-            } else {
-                return users;
+                        api.get(`api/user/getUsername?username=${response.data.username}`, header).then(values=>{
+                            if (values.data == "undefined" || !values.data) {
+                                notification.error({
+                                    message: `Login invalido`,
+                                    description: "Verifique seu email, ou faça cadastro",
+                                });
+                            } else {
+                                setData(values.data);
+                                setScreen("Welcome");
+                            }
+                        }).catch( ()=>{
+                                notification.error({
+                                    message: `Login invalido`,
+                                    description: "Verifique seu email, ou faça cadastro",
+                                });
+                                setScreen("Login");
+                            }
+                        )
+                    }
+                })
+                .catch(()=>{
+                    notification.error({
+                        message: `Login invalido`,
+                        description: "Verifique seu email, ou faça cadastro",
+                    });
+                    setScreen("Login");
+                }
+               )
             }
-        });
-        setLocalStorage(newData);
-        localStorage.setItem("logged", JSON.stringify(editar.email));
-        window.location.reload();
+        })
     };
 
-    const handleDeletar = (deletar) => {
-        deletar.preventDefault();
-        const usuario = JSON.parse(localStorage.getItem("logged"));
-    };
 
     const onClick = (e) => {
         e.preventDefault();
@@ -122,12 +174,6 @@ const App = () => {
         }
     };
 
-    const deslogar = (e) => {
-        e.preventDefault();
-        setScreen("Login");
-        localStorage.removeItem("logged");
-    };
-
     switch (screen) {
         case "Login":
             return (
@@ -135,26 +181,20 @@ const App = () => {
                     <FormLogin onSubmit={handleLogin} onClick={onClick} />
                 </div>
             );
-        case "Welcome":
-            const email = JSON.parse(localStorage.getItem("logged"));
-            // const data = api.get()
-            return (
-                <div>
-                    <Welcome
-                        // user={data}
-                        deslogar={deslogar}
-                        onSubmit={handleEditar}
-                        onDeletar={handleDeletar}
-                    />
-                </div>
-            );
+           break;
         case "ViewAdm":
-            const users = getLocalStorage();
             return (
                 <div>
-                    <ViewAdm users={users} deslogar={deslogar} />
+                    <ViewAdm users={data} deslogar={deslogar} />
                 </div>
             );
+        case "Welcome":
+            return (
+                <div>
+                    <Welcome user={data} deslogar={deslogar}/>
+                </div>
+            );
+            break;
         case "Register":
             return (
                 <div className="register">
@@ -164,7 +204,7 @@ const App = () => {
         default:
             return (
                 <div>
-                    <PageNotFound/>
+                    <PageNotFound back={deslogar}/>
                 </div>
             );
     }

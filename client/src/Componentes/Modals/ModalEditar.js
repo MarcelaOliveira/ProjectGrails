@@ -17,7 +17,16 @@ export default function ModalEditar(props) {
   const [userEdit, setUserEdit] = useState({});
   const [erro, setErro] = useState({});
   const [buttonState, setButtonState] = useState();
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const { user } = props;
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
 
   const setInputs = (evento) => {
     const stat = { ...user };
@@ -58,13 +67,13 @@ export default function ModalEditar(props) {
     <div>
         <Modal
           title="Editar conta"
-          visible={props.isModalVisible}
-          onCancel={props.handleCancel}
+          visible={showModal}
+          onCancel={handleCancel}
           footer={[
             <Button key="submit" type="primary" onClick={onSave}>
               Editar
             </Button>,
-            <Button key="back" onClick={props.handleCancel}>
+            <Button key="back" onClick={handleCancel}>
               Cancelar
             </Button>,
           ]}
