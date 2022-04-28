@@ -14,7 +14,7 @@ const setUser = (user) =>{
 const setUsername = (name) =>{
     const user = JSON.parse(localStorage.getItem("dbUser"));
     user.username = name;
-    localStorage.setItem("dbUser", JSON.stringify(user));
+    localStorage.setItem("dbUser",  JSON.stringify(user));
 }
 const logIn = (user) =>{
     return new Promise((resolve, reject) =>{
