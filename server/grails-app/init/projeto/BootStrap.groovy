@@ -11,7 +11,7 @@ class BootStrap {
             [ url: '/api/user',  configAttribute: 'ROLE_ADMIN' ],
             [ url: '/api/user/save', configAttribute: 'permitAll'],
             [ url: '/api/user/getUsername', configAttribute: 'ROLE_ADMIN, ROLE_USER' ],
-            [ url: '/api/user/update/**',  configAttribute: 'ROLE_ADMIN, ROLE_USER' ],
+            [ url: '/api/user/update/**',  configAttribute: 'ROLE_USER' ],
             [ url: '/api/user/delete/**',  configAttribute: 'ROLE_ADMIN, ROLE_USER' ],
             [ url: '/oauth/access_token',    configAttribute: 'permitAll' ],
             [ url: '/api/login/**', configAttribute: 'permitAll' ],

@@ -11,10 +11,10 @@ const setUser = (user) =>{
         localStorage.setItem("dbUser", JSON.stringify({username: user.username, roles: user.roles, access_token: user.access_token}) );
     }
 }
-const getUserById = () =>{
-    const userLocalStorage = localStorage.getItem("logged");
-    const user = userLocalStorage ? JSON.parse(userLocalStorage) : [];
-    return user;
+const setUsername = (name) =>{
+    const user = JSON.parse(localStorage.getItem("dbUser"));
+    user.username = name;
+    localStorage.setItem("dbUser", JSON.stringify(user));
 }
 const logIn = (user) =>{
     return new Promise((resolve, reject) =>{
@@ -32,7 +32,7 @@ const logOut = () => {
 
 export const Authentication = {
     setUser,
-    getUserById,
     logIn,
-    logOut
+    logOut,
+    setUsername
 }

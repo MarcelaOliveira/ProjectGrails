@@ -6,38 +6,25 @@ import { Table, Row, Col, Button, Card } from "antd";
 import { FormOutlined, DeleteOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 
-function Welcome({user, deslogar}) {
+function Welcome({ user, deslogar, onSubmit, onDeletar }) {
   const [buttonState, setButtonState] = useState();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalDeleteVisible, setIsModalDeleteVisible] = useState(false);
+
+  const handleSizeChange = (e) => {
+    setButtonState({ size: e.target.value });
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+    setIsModalDeleteVisible(false);
+  };
+
   const showModal = () => {
     setIsModalVisible(true);
   };
   const showModalDelete = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleDeletar = (deletar) => {
-    // deletar.preventDefault();
-    // const usuario = JSON.parse(localStorage.getItem("logged"));
-  };
-
-  const handleEditar = (editar) => {
-    // const users = getLocalStorage();
-    // const usuario = JSON.parse(localStorage.getItem("logged"));
-    // const newData = users.map((user) => {
-    //   if (user.email === usuario) {
-    //     return { ...editar };
-    //   } else {
-    //     return users;
-    //   }
-    // });
-    // setLocalStorage(newData);
-    // localStorage.setItem("logged", JSON.stringify(editar.email));
-    // window.location.reload();
-  };
-
-  const handleSizeChange = (e) => {
-    setButtonState( e.target.value );
+    setIsModalDeleteVisible(true);
   };
 
   const size = buttonState;
@@ -68,9 +55,9 @@ function Welcome({user, deslogar}) {
       key: "editar",
       dataIndex: "editar",
       render: (text) => (
-        <a onClick={showModal}>
-          <FormOutlined />
-        </a>
+          <a style={{ color: "blue" }} onClick={showModal}>
+            <FormOutlined />
+          </a>
       ),
     },
     {
@@ -78,9 +65,9 @@ function Welcome({user, deslogar}) {
       key: "deletar",
       dataIndex: "deletar",
       render: (text) => (
-        <a style={{ color: "red" }} onClick={showModalDelete}>
-          <DeleteOutlined />
-        </a>
+          <a style={{ color: "red" }} onClick={showModalDelete}>
+            <DeleteOutlined />
+          </a>
       ),
     },
   ];
@@ -96,47 +83,51 @@ function Welcome({user, deslogar}) {
   ];
 
   return (
-    <StyledViw>
-      <center>
-        <Card
-          className="card"
-          type="inner"
-          ustify="space-around"
-          align="middle"
-          style={{ marginTop: 80, width: 1200 }}
-        >
-          <div justify="space-around" align="middle">
-            {/*<h1>Welcome, {user.nome}</h1>*/}
-          </div>
-          <Row justify="space-around" align="middle">
-            <Col span={18}>
-              <Table columns={columns} dataSource={data} pagination={false} />
-              {/*<ModalEditar*/}
-              {/*  // user={user}*/}
-              {/*  onSubmit={handleEditar}*/}
-              {/*/>*/}
-              {/*<ModalDeletar*/}
-              {/*  onSubmit={handleDeletar}*/}
-              {/*/>*/}
-            </Col>
-          </Row>
-
-          <center>
-            <Card
+      <StyledViw>
+        <center>
+          <Card
+              className="card"
               type="inner"
-              style={{ marginTop: 20, width: 200 }}
-              justify="space-around"
+              ustify="space-around"
               align="middle"
-            >
-              Deseja sair?
-              <Button type="link" size={size} onClick={deslogar}>
-                Sair
-              </Button>
-            </Card>
-          </center>
-        </Card>
-      </center>
-    </StyledViw>
+              style={{ marginTop: 80, width: 1200 }}
+          >
+            <div justify="space-around" align="middle">
+              <h1>Welcome, {user.username}</h1>
+            </div>
+            <Row justify="space-around" align="middle">
+              <Col span={18}>
+                <Table columns={columns} dataSource={data} pagination={false} />
+                <ModalEditar
+                    user={user}
+                    onSubmit={onSubmit}
+                    isModalVisible={isModalVisible}
+                    handleCancel={handleCancel}
+                />
+                <ModalDeletar
+                    isModalDeleteVisible={isModalDeleteVisible}
+                    onSubmit={onDeletar}
+                    handleCancel={handleCancel}
+                />
+              </Col>
+            </Row>
+
+            <center>
+              <Card
+                  type="inner"
+                  style={{ marginTop: 20, width: 200 }}
+                  justify="space-around"
+                  align="middle"
+              >
+                Deseja sair?
+                <Button type="link" size={size} onClick={deslogar}>
+                  Sair
+                </Button>
+              </Card>
+            </center>
+          </Card>
+        </center>
+      </StyledViw>
   );
 }
 

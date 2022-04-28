@@ -6,7 +6,7 @@ import ViewAdm from "./Componentes/ViewAdm";
 import PageNotFound from "./Componentes/PageNotFound";
 import api from "./Services/APIAxios";
 import { Authentication }  from "./Services/Authentication"
-import headers from "./Services/Headers";
+import header from "./Services/Header";
 
 
 import { notification } from "antd";
@@ -16,32 +16,13 @@ const App = () => {
     const [screen, setScreen] = useState("Register");
     const [data, setData] =  useState({});
 
-    const getLocalStorage = (usuario) => {
-        const dbUserStorage = localStorage.getItem("dbUser");
-        const dbUser = dbUserStorage ? JSON.parse(dbUserStorage) : [];
-        if (usuario) {
-            return dbUser.find((user) => user.email === usuario.email);
-        } else {
-            return dbUser;
-        }
-    };
-
-    const setLocalStorage = (dbUser) => {
-        if (typeof dbUser === "undefined") {
-            localStorage.setItem("dbUser", JSON.stringify([]));
-        } else {
-            localStorage.setItem("dbUser", JSON.stringify(dbUser));
-        }
-    };
-
     useEffect(() => {
         let user = JSON.parse(localStorage.getItem("dbUser"));
-        const header = {headers}
         if(user){
             const { roles } = user
             if (user != null || Object.values(user).length > 0) {
                 if(roles.includes("ROLE_ADMIN")){
-                    api.get('/api/user', {headers: header.headers}).then(values=>{
+                    api.get("/api/user", header).then(values=>{
                             if (values.data == "undefined" || !values.data) {
                                 notification.error({
                                     message: `Login invalido`,
@@ -79,7 +60,7 @@ const App = () => {
                         }
                     )
                 }
-        }else{
+            }else{
                 setScreen("Login");
             }
         } else {
@@ -87,41 +68,33 @@ const App = () => {
         }
     }, []);
 
-
-    const deslogar = (e) => {
-        e.preventDefault();
-        setScreen("Login");
-        localStorage.removeItem("dbUser");
-    };
-
     const handleRegister = (event) => {
-       api.post("/api/user/save", event ).then(e =>  setScreen("Login") )
-    .catch( e =>{
-          setScreen("Register")
-             notification.error({
-                message: `Cadastro já existente`,
-                description: "Verifique seu email, ou faça login",
-             })
-          }
-       )
+        api.post("/api/user/save", event ).then(e =>  setScreen("Login") )
+            .catch( e =>{
+                    setScreen("Register")
+                    notification.error({
+                        message: `Cadastro já existente`,
+                        description: "Verifique seu email, ou faça login",
+                    })
+                }
+            )
     };
 
     const handleLogin = (user) => {
         api.post("/api/login", user).then(response =>{
             if(response.data){
                 Authentication.logIn(response.data).then(()=>{
-                    const header = {headers}
                     if(response.data.roles.includes('ROLE_ADMIN')){
-                        api.get('/api/user', {headers: header.headers}).then(values=>{
-                            if (values.data == "undefined" || !values.data) {
-                                notification.error({
-                                    message: `Login invalido`,
-                                    description: "Verifique seu email, ou faça cadastro",
-                                });
-                            } else {
-                                setData(values.data);
-                                setScreen("ViewAdm");
-                            }
+                        api.get('/api/user', header).then(values=>{
+                                if (values.data == "undefined" || !values.data) {
+                                    notification.error({
+                                        message: `Login invalido`,
+                                        description: "Verifique seu email, ou faça cadastro",
+                                    });
+                                } else {
+                                    setData(values.data);
+                                    setScreen("ViewAdm");
+                                }
                             }
                         ).catch( ()=>{
                             notification.error({
@@ -131,7 +104,6 @@ const App = () => {
                             setScreen("Login");
                         });
                     }else{
-
                         api.get(`api/user/getUsername?username=${response.data.username}`, header).then(values=>{
                             if (values.data == "undefined" || !values.data) {
                                 notification.error({
@@ -143,27 +115,71 @@ const App = () => {
                                 setScreen("Welcome");
                             }
                         }).catch( ()=>{
-                                notification.error({
-                                    message: `Login invalido`,
-                                    description: "Verifique seu email, ou faça cadastro",
-                                });
-                                setScreen("Login");
-                            }
-                        )
+                            notification.error({
+                                message: `Login invalido`,
+                                description: "Verifique seu email, ou faça cadastro",
+                            });
+                            setScreen("Login");
+                        })
                     }
-                })
-                .catch(()=>{
-                    notification.error({
-                        message: `Login invalido`,
-                        description: "Verifique seu email, ou faça cadastro",
-                    });
-                    setScreen("Login");
-                }
-               )
+                }).catch(()=>{
+                        notification.error({
+                            message: `Login invalido`,
+                            description: "Verifique seu email, ou faça cadastro",
+                        });
+                        setScreen("Login");
+                    })
             }
         })
     };
 
+    const handleEditar = (userEdit) => {
+        if(userEdit){
+          api.put(`api/user/update/id=${userEdit.id}`,userEdit, header).then(response =>{
+              console.log('Aqui');
+              // if(response.data){
+              //     Authentication.setUsername(response.data.username).then(values => {
+              //       setData(response.data)
+              //     }).catch(() => {
+              //         notification.error({
+              //                 message: `Update invalido`,
+              //                 description: "Verifique seus dados!",
+              //         });
+              //         setScreen("Welcome");
+              //     })
+              //
+              // }else{
+              //     notification.error({
+              //         message: `Update invalido`,
+              //         description: "Verifique seus dados!",
+              //     });
+              //     setScreen("Welcome");
+              // }
+          }).catch(()=> {
+              console.log("Deu ruim");
+              // notification.error({
+              //     message: `Update invalido`,
+              //     description: "Verifique seus dados!",
+              // });
+              // setScreen("Welcome");
+          });
+        }else{
+            notification.error({
+                message: `Update invalido`,
+                description: "Verifique seus dados!",
+            });
+            setScreen("Welcome");
+        }
+    }
+
+    const handleDeletar = (userDelit) => {
+        userDelit.preventDefault();
+    }
+    const deslogar = (e) => {
+        e.preventDefault();
+        setScreen("Login");
+        localStorage.removeItem("dbUser");
+    };
 
     const onClick = (e) => {
         e.preventDefault();
@@ -181,7 +197,7 @@ const App = () => {
                     <FormLogin onSubmit={handleLogin} onClick={onClick} />
                 </div>
             );
-           break;
+            break;
         case "ViewAdm":
             return (
                 <div>
@@ -191,7 +207,8 @@ const App = () => {
         case "Welcome":
             return (
                 <div>
-                    <Welcome user={data} deslogar={deslogar}/>
+                    <Welcome user={data}  onSubmit={handleEditar}
+                             onDeletar={handleDeletar} deslogar={deslogar}/>
                 </div>
             );
             break;

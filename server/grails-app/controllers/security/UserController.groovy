@@ -31,7 +31,7 @@ class UserController {
 
     def getUsername( ){
         def model = [ : ]
-        def username = "%"+params.username+"%"
+        def username = params.username
         User user = User.findByUsernameIlike(username)
         model.put("user", user)
         respond model

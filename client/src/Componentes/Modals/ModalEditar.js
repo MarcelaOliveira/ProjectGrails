@@ -17,16 +17,7 @@ export default function ModalEditar(props) {
   const [userEdit, setUserEdit] = useState({});
   const [erro, setErro] = useState({});
   const [buttonState, setButtonState] = useState();
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const { user } = props;
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
 
   const setInputs = (evento) => {
     const stat = { ...user };
@@ -34,22 +25,15 @@ export default function ModalEditar(props) {
     setUserEdit(stat);
   };
 
-  const onSave = ({senha, confSenha}) => {
-    if (JSON.stringify(userEdit) === "{}") {
-      setErro("Faça alguma alteração, ou cancele a ação!");
-
+  const onSave = (evente) => {
+    if (evente.senha === evente.confSenha) {
+      props.onSubmit(userEdit);
     } else {
-      if (senha === confSenha) {
-        props.onSubmit(userEdit);
-        console.log("oK");
-      } else {
-        setErro("Senha e confirmar senha devem ser iguais!");
-      }
+      setErro("Senha e confirmar senha devem ser iguais!");
     }
-    ;
-  }
+  };
   const handleSizeChange = (e) => {
-    setButtonState( e.target.value );
+    setButtonState({ size: e.target.value });
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -63,142 +47,96 @@ export default function ModalEditar(props) {
       ...user,
     });
   }, [props]);
-  return (
-    <div>
-        <Modal
-          title="Editar conta"
-          visible={showModal}
-          onCancel={handleCancel}
-          footer={[
-            <Button key="submit" type="primary" onClick={onSave}>
-              Editar
-            </Button>,
-            <Button key="back" onClick={handleCancel}>
-              Cancelar
-            </Button>,
-          ]}
-        >
-          <Form  autoComplete="off"
-                 onFinishFailed={onFinishFailed} form={form}>
-          <StyledForms>
-            <center>
-              <Form.Item
-                name="nome"
-                onChange={setInputs}
-                rules={[
-                  {
-                    required: true,
-                    message: "Por favor preencha todos os campos!",
-                  },
-                ]}
-              >
-                <Input
-                  prefix={<UserOutlined />}
-                  name="nome"
-                  className="input"
-                  type="text"
-                />
-              </Form.Item>
-              <Form.Item
-                name="email"
-                onChange={setInputs}
-                rules={[
-                  {
-                    required: true,
-                    message: "Por favor preencha todos os campos!",
-                  },
-                ]}
-              >
-                <Input
-                  prefix={<MailOutlined />}
-                  name="email"
-                  className="input"
-                  type="email"
-                />
-              </Form.Item>
-              <Form.Item
-                name="endereco"
-                onChange={setInputs}
-                rules={[
-                  {
-                    required: true,
-                    message: "Por favor preencha todos os campos!",
-                  },
-                ]}
-              >
-                <Input
-                  prefix={<HomeOutlined />}
-                  name="endereco"
-                  className="input"
-                />
-              </Form.Item>
-              <Form.Item
-                name="telefone"
-                onChange={setInputs}
-                rules={[
-                  {
-                    required: true,
-                    message: "Por favor preencha todos os campos!",
-                  },
-                ]}
-              >
-                <Input
-                  prefix={<PhoneOutlined />}
-                  name="telefone"
-                  type="text"
-                  className="input"
-                />
-              </Form.Item>
-              <Form.Item
-                name="senha"
-                iconRender={(visible) =>
-                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                }
-                onChange={setInputs}
-                rules={[
-                  {
-                    required: true,
-                    message: "Por favor preencha todos os campos!",
-                  },
-                ]}
-              >
-                <Input.Password
-                  prefix={<UnlockOutlined />}
-                  name="senha"
-                  className="input"
-                  type="password"
-                />
-              </Form.Item>
 
-              <Form.Item
-                name="confSenha"
-                iconRender={(visible) =>
-                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                }
-                onChange={setInputs}
-                rules={[
-                  {
-                    required: true,
-                    message: "Por favor preencha todos os campos!",
-                  },
-                ]}
-              >
-                <Input.Password
-                  prefix={<UnlockOutlined />}
-                  name="confSenha"
-                  className="input"
-                  type="password"
-                />
-              </Form.Item>
-              {erro.length > 0 && (
-                <center>
-                  <spam>{erro}</spam>
-                </center>
-              )}
-            </center>
-          </StyledForms>
-          </Form>
-        </Modal>
-    </div>
+  return (
+      <div>
+        <Form autoComplete="off" onFinishFailed={onFinishFailed} form={form}>
+          <Modal
+              title="Editar conta"
+              visible={props.isModalVisible}
+              onCancel={props.handleCancel}
+              footer={[
+                <Button key="submit" type="primary" onClick={onSave}>
+                  Editar
+                </Button>,
+                <Button key="back" onClick={props.handleCancel}>
+                  Cancelar
+                </Button>,
+              ]}
+          >
+            <StyledForms>
+              <center>
+                <Form.Item
+                    name="username"
+                    onChange={setInputs}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Por favor preencha todos os campos!",
+                      },
+                    ]}
+                >
+                  <Input
+                      prefix={<UserOutlined />}
+                      name="username"
+                      className="input"
+                      type="text"
+                  />
+                </Form.Item>
+                <Form.Item
+                    name="email"
+                    onChange={setInputs}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Por favor preencha todos os campos!",
+                      },
+                    ]}
+                >
+                  <Input
+                      prefix={<MailOutlined />}
+                      name="email"
+                      className="input"
+                      type="email"
+                  />
+                </Form.Item>
+                <Form.Item
+                    name="endereco"
+                    onChange={setInputs}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Por favor preencha todos os campos!",
+                      },
+                    ]}
+                >
+                  <Input
+                      prefix={<HomeOutlined />}
+                      name="endereco"
+                      className="input"
+                  />
+                </Form.Item>
+                <Form.Item
+                    name="telefone"
+                    onChange={setInputs}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Por favor preencha todos os campos!",
+                      },
+                    ]}
+                >
+                  <Input
+                      prefix={<PhoneOutlined />}
+                      name="telefone"
+                      type="text"
+                      className="input"
+                  />
+                </Form.Item>
+              </center>
+            </StyledForms>
+          </Modal>
+        </Form>
+      </div>
   );
 }
