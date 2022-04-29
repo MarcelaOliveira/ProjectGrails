@@ -106,12 +106,20 @@ class UserController {
     }
 
     @Transactional
-    def delete(Long id) {
-        if (id == null || userService.delete(id) == null) {
+    def delete() {
+        Long id = Long.parseLong(params.id?: null)
+        if (id) {
+            try{
+                User user = User.findById(id)
+                UserRole.findByUser(user).delete()
+                user.delete()
+                render "User deleted!"
+            }catch(e){
+                render Error: e
+            }
+        }else {
             render status: NOT_FOUND
-            return
         }
 
-        render status: NO_CONTENT
     }
 }

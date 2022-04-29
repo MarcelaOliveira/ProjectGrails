@@ -7,8 +7,6 @@ import PageNotFound from "./Componentes/PageNotFound";
 import api from "./Services/APIAxios";
 import { Authentication }  from "./Services/Authentication"
 import header from "./Services/Header";
-
-git add
 import { notification } from "antd";
 import "./css/App.css"
 
@@ -154,7 +152,7 @@ const App = () => {
                       setData(response.data)
                     }).catch(() => {
                         notification.error({
-                                message: `Update1 invalido`,
+                                message: `Update invalido`,
                                 description: "Verifique seus dados!",
                         });
                         setScreen("Welcome");
@@ -162,7 +160,7 @@ const App = () => {
 
                 }else{
                     notification.error({
-                        message: `Update2 invalido`,
+                        message: `Update invalido`,
                         description: "Verifique seus dados!",
                     });
                     setScreen("Welcome");
@@ -170,7 +168,7 @@ const App = () => {
             })
         }else{
             notification.error({
-                message: `Update4 invalido`,
+                message: `Update invalido`,
                 description: "Verifique seus dados!",
             });
             setScreen("Welcome");
@@ -193,14 +191,14 @@ const App = () => {
                 });
             } else {
                 api.delete(`/api/user/delete?id=${values.data.id}`, {headers}).then(()=>{
-                    deslogar();
+                    localStorage.removeItem("dbUser");
+                    window.location.reload();
                 }).catch(()=>{
                     console.log("Deu ruim");
                 })
             }
         })
     }
-
 
     const deslogar = (e) => {
         e.preventDefault();
