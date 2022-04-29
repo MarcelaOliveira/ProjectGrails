@@ -140,6 +140,7 @@ const App = () => {
     };
 
     const handleEditar = (userEdit) => {
+        console.log(userEdit)
         const auth = JSON.parse(localStorage.getItem("dbUser")).access_token;
         if(userEdit){
             const headers = {

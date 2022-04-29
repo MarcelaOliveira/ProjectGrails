@@ -12,6 +12,7 @@ const setUser = (user) =>{
     }
 }
 const setUsername = (name) =>{
+    console.log(name);
     const user = JSON.parse(localStorage.getItem("dbUser"));
     user.username = name;
     localStorage.setItem("dbUser",  JSON.stringify(user));
@@ -26,13 +27,9 @@ const logIn = (user) =>{
         }
     })
 }
-const logOut = () => {
-    delete localStorage.user;
-}
 
 export const Authentication = {
     setUser,
     logIn,
-    logOut,
     setUsername
 }

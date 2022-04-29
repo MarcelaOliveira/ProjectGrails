@@ -48,7 +48,7 @@ class UserController {
                 endereco: params.endereco,
                 telefone: params.telefone,
                 adm: params.adm?: false ,
-                enabled: false,
+                enabled: true,
                 accountExpired: false,
                 accountLocked: false,
                 passwordExpired: false

@@ -20,7 +20,7 @@ export default function ModalEditar(props) {
   const { user } = props;
 
   const setInputs = (evento) => {
-    const stat = { ...user };
+    const stat = { ...userEdit };
     stat[evento.target.name] = evento.target.value;
     setUserEdit(stat);
   };
@@ -43,11 +43,13 @@ export default function ModalEditar(props) {
   const size = buttonState;
 
   useEffect(() => {
-    form.setFieldsValue({
-      ...user,
-    });
+      setUserEdit(user)
+        form.setFieldsValue({
+          ...user,
+        });
   }, [props]);
 
+console.log(userEdit);
   return (
       <div>
         <Form autoComplete="off" onFinishFailed={onFinishFailed} form={form}>
